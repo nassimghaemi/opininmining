@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Sentimente Analyze + Opinion Mining</title>
+    <style>
+      .background {
+  /* display: flex; */
+  min-height: 100vh;
+  width: 100vw;
+  /* justify-content: center;
+  align-items: center; */
+  background: linear-gradient(45deg, rgb(26, 1, 117) 0%, rgba(225, 5, 34, 0) 70%) repeat scroll 0% 0%, 
+  linear-gradient(135deg, rgb(225, 5, 152) 10%, rgba(49, 5, 209, 0) 80%) repeat scroll 0% 0%, 
+  linear-gradient(225deg, hsla(179, 81%, 45%, 1) 10%, rgba(10, 219, 216, 0) 80%) repeat scroll 0% 0%,
+   rgba(0, 0, 0, 0) linear-gradient(315deg, rgb(189, 5, 245) 100%, rgba(9, 245, 5, 0) 70%) repeat scroll 0% 0%;
+
+   color:antiquewhite;
+}
+
+/* Shapes */
+.background .shape {
+  filter: blur(465px);
+  position: absolute;
+}
+
+.background .shape:nth-child(1) {
+  background-color: #ffb0d8;
+  top: -340px;
+  width: 300px;
+  height: 300px;
+}
+
+.background .shape:nth-child(2) {
+  left: 100px;
+  bottom: -150px;
+  background-color: #c26cf3;
+  width: 200px;
+  height: 210px;
+}
+
+.background .shape:nth-child(3) {
+  background-color: #87cfdf;
+  bottom: -150px;
+  right: 100px;
+  width: 300px;
+  height: 300px;
+}
+
+      .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid blue;
+      border-right: 16px solid green;
+      border-bottom: 16px solid red;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+    </style>
+</head>
+<body style="display: flex;flex-direction: column;justify-content: center;align-items: center;" class="background">
+    <h1>عقیده کاوی و تحلیل احساسات </h1>
+    <h2>
+      در این نرم افزار، ما یک صاحب کسب و کار خواهیم بود که نظرات مشتریان خود را بررسی می‌کند تا شکایات را پیدا کند
+
+    </h2>
+    <h3>
+      ،برای تست فایل خود را آپلود کنید و یا از مثال های آماده استفاده کنید </h3>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput" accept=".json">
+        <button type="submit">آپلود فایل</button>
+    </form>
+
+
+    {% if text %}
+    <H3 style="color: tomato;">{{ text[0] }}</H3>
+    <H3 >{{ text[1] }}</H3>
+    <H3 >{{ text[2] }}</H3>
+    <H3 >{{ text[3] }}</H3>
+    <H3 >{{ text[4] }}</H3>
+    <H3 >{{ text[5] }}</H3>
+    <H3 >{{ text[6] }}</H3>
+    <div id="myPlot" style="width:100%;max-width:700px"></div>
+   <p>{{results}}</p>
+
+
+<script>
+const xArray = ["Positive", "Mixed", "Negative"];
+const yArray = {{reviews}};
+const layout = {title:"Analyze Chart"};
+const data = [{labels:xArray, values:yArray, type:"pie"}];
+Plotly.newPlot("myPlot", data, layout);
+</script>
+
+
+    {% else %}
+    <div class="loader"></div>
+    {% endif %}
+
+   
+</body>
+</html>
