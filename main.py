@@ -8,8 +8,9 @@ from azure.ai.textanalytics import TextAnalyticsClient
 
 app = Flask(__name__)
 
-endpoint = 'https://testopi.cognitiveservices.azure.com'
-key = 'e4768bad415e460abdd2015df74d606b'
+endpoint = os.getenv('endpoint')
+key = os.getenv('key')
+
 
 text_analytics_client = TextAnalyticsClient(
     endpoint=endpoint,
@@ -79,7 +80,7 @@ def index():
 
 
         # return f'File uploaded successfully: {filename}'
-    print(sentences)
+
     return render_template('index.html',text=text,reviews=reviews,results=sentences)
 
 if __name__ == '__main__':
